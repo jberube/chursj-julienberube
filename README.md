@@ -4,7 +4,7 @@
 
 ### Fonctionalités
 
-* 🏃 Barre de recherche
+* ✅ Barre de recherche
 * 🏃 Appel à l'API
 * Défilement infini
 * Changement du "hash"
