@@ -4,8 +4,8 @@
 
 ### Fonctionalités
 
-* Barre de recherche
-* Appel à l'API
+* 🏃 Barre de recherche
+* 🏃 Appel à l'API
 * Défilement infini
 * Changement du "hash"
 * Design adapté
@@ -13,7 +13,7 @@
 ### Autre
 
 * ✅ ~~Boilerplate~~
-* Programation
+* 🏃 Programation
 * Publier
 * Documenter
 
