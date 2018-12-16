@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
+import './SearchBar.css';
+
 class SearchBar extends Component {
     constructor () {
         super();
@@ -12,7 +14,6 @@ class SearchBar extends Component {
     }
 
     handleKeyPressed (evt) {
-        // console.log(`handleKeyPressed ${evt.key}`);
         if (evt.key !== 'Enter') {
             return;
         }
@@ -21,7 +22,6 @@ class SearchBar extends Component {
     }
 
     handleChange (evt) {
-        // console.log(`handleChange ${evt.target.value}`);
         this.setState({ searchTerm: evt.target.value });
     }
 

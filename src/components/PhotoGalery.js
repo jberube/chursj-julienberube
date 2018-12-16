@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
 import './PhotoGalery.css';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import {Row, Col, Button} from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 
 class PhotoGalery extends Component {
     constructor () {
@@ -21,14 +22,21 @@ class PhotoGalery extends Component {
         const {images} = this.props;
 
         return (
-            <Row className="photo-galery-container">
-                {images.map(img => 
-                    <Col key={img.id} xs={6} sm={4} md={3} lg={2}>
-                        <img src={img.thumbnail.url} alt={img.title}/>
-                    </Col>
-                )}
-                <Button onClick={this.loadMore}>more...</Button>
-            </Row>
+            <div className="photo-galery-container">
+                <InfiniteScroll
+                    dataLength={images.length}
+                    next={this.loadMore}
+                    hasMore={true}
+                    loader={<p>...</p>}
+                >
+                    {images.map(img => 
+                        <Col key={img.id} xs={6} sm={4} md={3} lg={2}>
+                            <img src={img.thumbnail.url} alt={img.title}/>
+                        </Col>
+                    )}
+                </InfiniteScroll>
+                {images.length ? <Button onClick={this.loadMore}>more...</Button> : null}
+            </div>
         );
     }
 }

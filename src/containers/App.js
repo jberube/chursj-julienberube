@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Row, Col } from 'react-bootstrap';
 
 import { searchImages, fetchImagesPage } from '../store/actions/images';
 
@@ -20,13 +21,20 @@ class App extends Component {
 
         return (
             <div className="App">
-                <SearchBar onSearch={onSearch} />
-                <PhotoGalery
-                    images={images}
-                    searchTerm={searchTerm}
-                    pageNumber={pageNumber}
-                    onFetchPage={onFetchPage}
-                />
+                <Row>
+                    <Col xs={12}>
+                        <SearchBar onSearch={onSearch} />
+                    </Col>
+                </Row>
+                
+                <Row>
+                    <PhotoGalery
+                        images={images}
+                        searchTerm={searchTerm}
+                        pageNumber={pageNumber}
+                        onFetchPage={onFetchPage}
+                    />
+                </Row>
             </div>
         );
     }
