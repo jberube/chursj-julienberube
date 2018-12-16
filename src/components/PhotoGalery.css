@@ -1,0 +1,9 @@
+.photo-galery-container {
+    margin: 0 20px;
+}
+
+.photo-galery-container img {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 10px 0;
+}

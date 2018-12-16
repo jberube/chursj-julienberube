@@ -3,14 +3,19 @@ import axios from 'axios';
 import {
     START_SEARCH_IMAGES,
     DONE_SEARCH_IMAGES,
+    START_FETCH_PAGE,
 } from '../actionTypes';
 
 const BASE_URL = 'https://api.flickr.com/services/rest/';
 const FLICKR_API_KEY = 'b75a009cee4005c8157be53006653f82';
 
-export const searchImages = searchTerm => dispatch => {
-    dispatch(startSearchImages(searchTerm));
+const doneSearchImages = (pageNumber, images) => ({
+    type: DONE_SEARCH_IMAGES,
+    pageNumber,
+    images,
+});
 
+const fetchPage = (searchTerm, pageNumber) => {
     // see: https://www.flickr.com/services/api/flickr.photos.search.html
     return axios.get(BASE_URL, {
         params: {
@@ -21,7 +26,7 @@ export const searchImages = searchTerm => dispatch => {
             privacy_filter: '1',
             media: 'photos',
             per_page: '6',
-            page: '1',
+            page: pageNumber,
             format: 'json',
             nojsoncallback: '1',
             extras: 'url_q, url_o',
@@ -52,11 +57,21 @@ export const searchImages = searchTerm => dispatch => {
         }));
     })
     .then(photos => {
-        dispatch(doneSearchImages(1, photos));
+        return doneSearchImages(pageNumber, photos);
     }, err => {
         console.error(err);
         throw new Error(`failed to retreive photos for searchTerm ${searchTerm}`);
     });
+};
+
+const startFetchPage = pageNumber => ({
+    type: START_FETCH_PAGE,
+    pageNumber,
+});
+
+export const fetchImagesPage = (searchTerm, pageNumber) => dispatch => {
+    dispatch(startFetchPage(pageNumber));
+    fetchPage(searchTerm, pageNumber).then(dispatch);
 };
 
 const startSearchImages = (searchTerm) => ({
@@ -64,8 +79,8 @@ const startSearchImages = (searchTerm) => ({
     searchTerm,
 });
 
-const doneSearchImages = (page, images) => ({
-    type: DONE_SEARCH_IMAGES,
-    page,
-    images,
-});
+export const searchImages = searchTerm => dispatch => {
+    dispatch(startSearchImages(searchTerm));
+    dispatch(startFetchPage(1));
+    fetchPage(searchTerm, 1).then(dispatch);
+};

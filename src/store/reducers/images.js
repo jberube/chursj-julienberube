@@ -1,9 +1,10 @@
-import { START_SEARCH_IMAGES, DONE_SEARCH_IMAGES } from '../actionTypes';
+import { START_SEARCH_IMAGES, DONE_SEARCH_IMAGES, START_FETCH_PAGE } from '../actionTypes';
 
 const initialState = {
     searchTerm: '',
     images: [],
-    currentPage: 0,
+    currentPage: 1,
+    fetching: false,
 };
 
 const images = (state = initialState, action) => {
@@ -16,8 +17,15 @@ const images = (state = initialState, action) => {
         case DONE_SEARCH_IMAGES:
             return {
                 ...state,
+                fetching: false,
                 images: state.images.concat(action.images),
-                currentPage: action.page,
+                currentPage: action.pageNumber,
+            };
+        case START_FETCH_PAGE:
+            return {
+                ...state,
+                fetching: true,
+                currentPage: action.pageNumber,
             };
         default:
             return state;
