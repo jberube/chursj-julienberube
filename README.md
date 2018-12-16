@@ -6,9 +6,11 @@
 
 * ✅ Barre de recherche
 * 🏃 Appel à l'API
+  * Gestion des erreurs
 * Défilement infini
 * Changement du "hash"
 * Design adapté
+
 
 ### Autre
 

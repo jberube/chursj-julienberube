@@ -12,6 +12,7 @@ class SearchBar extends Component {
     }
 
     handleKeyPressed (evt) {
+        // console.log(`handleKeyPressed ${evt.key}`);
         if (evt.key !== 'Enter') {
             return;
         }
@@ -20,6 +21,7 @@ class SearchBar extends Component {
     }
 
     handleChange (evt) {
+        // console.log(`handleChange ${evt.target.value}`);
         this.setState({ searchTerm: evt.target.value });
     }
 
