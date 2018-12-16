@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
-import { store } from './store/initStore';
+import { store } from '../store/initStore';
 
 import App from './App';
-import SearchBar from './SearchBar';
+import SearchBar from '../components/SearchBar';
 
 const givenAMountedApp = () => mount(
     <Provider store={store}>

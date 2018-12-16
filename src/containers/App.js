@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { searchImages } from './store/actions/images';
+import { searchImages } from '../store/actions/images';
 
 import './App.css';
-import SearchBar from './SearchBar';
+import SearchBar from '../components/SearchBar';
 
 class App extends Component {
     render() {
