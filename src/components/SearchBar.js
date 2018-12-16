@@ -5,10 +5,10 @@ import autoBind from 'react-autobind';
 import './SearchBar.css';
 
 class SearchBar extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
-            searchTerm: '',
+            searchTerm: props.searchTerm,
         };
         autoBind(this);
     }
@@ -33,6 +33,7 @@ class SearchBar extends Component {
                     placeholder="keyword"
                     onKeyPress={this.handleKeyPressed}
                     onChange={this.handleChange}
+                    value={this.props.searchTerm}
                 />
             </div>
         );
@@ -41,6 +42,7 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
     onSearch: PropTypes.func.isRequired,
+    searchTerm: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

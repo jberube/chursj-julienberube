@@ -10,6 +10,18 @@ import SearchBar from '../components/SearchBar';
 import PhotoGalery from '../components/PhotoGalery';
 
 class App extends Component {
+    constructor() {
+        super();
+        window.onhashchange = function(evt) {
+            if (evt.newURL === evt.oldURL) {
+                return;
+            }
+
+            const hash = window.location.hash.replace(/^#\/?/, '');
+            this.props.onSearch(hash);
+        }.bind(this);
+    }
+
     render() {
         const {
             images,
@@ -23,7 +35,10 @@ class App extends Component {
             <div className="App">
                 <Row>
                     <Col xs={12}>
-                        <SearchBar onSearch={onSearch} />
+                        <SearchBar 
+                            searchTerm={searchTerm}
+                            onSearch={onSearch}
+                        />
                     </Col>
                 </Row>
                 

@@ -1,7 +1,11 @@
 import { START_SEARCH_IMAGES, DONE_SEARCH_IMAGES, START_FETCH_PAGE } from '../actionTypes';
 
-const initialState = {
-    searchTerm: '',
+const initialSearchTerm = window ?
+    window.location.hash.replace(/^#\/?/, '') :
+    '';
+
+export const initialState = {
+    searchTerm: initialSearchTerm,
     images: [],
     currentPage: 1,
     fetching: false,
